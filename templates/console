@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+// Application
+$app = new Silex\Application();
+
+// Console
+$console = new Symfony\Component\Console\Application();
+
+// Console reference for the ConsoleCommandServiceProvider
+$app['console'] = $console;
+
+// Require dev project configuration
+require __DIR__.'/../app/config/dev.php';
+
+// Require application setup
+require __DIR__.'/../src/app.php';
+
+// Require the project's console.php file
+$console = require __DIR__.'/../src/console.php';
+
+// Run the console
+$console->run();
